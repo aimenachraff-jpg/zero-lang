@@ -1,4 +1,4 @@
-![ZERO-LANG — Advanced English Through World Knowledge](public/banner.svg)
+![ZERO-LANG — Advanced English Through World Knowledge](public/banner.png)
 
 # ZERO-LANG
 
@@ -207,7 +207,7 @@ Open [http://localhost:3000](http://localhost:3000).
 │   │   └── utils.ts             # cn(), formatting
 │   └── middleware.ts            # Session refresh + protected routes
 ├── supabase/migrations/         # Schema + RLS policies
-└── public/banner.svg            # This README's banner
+└── public/banner.png            # This README's banner
 ```
 
 ---
