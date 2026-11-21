@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useAuth } from '@/app/providers'
 import { cn } from '@/lib/utils'
+import Image from 'next/image'
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -81,16 +82,15 @@ export function Header() {
           )}
 
           <Link href="/" className="flex shrink-0 items-center gap-2" aria-label="ZERO-LANG Home">
-            <svg
-              className="h-8 w-8 text-primary"
-              viewBox="0 0 32 32"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+            <Image
+              src="/logo.png"
+              alt=""
+              width={32}
+              height={32}
+              className="h-8 w-auto"
               aria-hidden="true"
-            >
-              <rect width="32" height="32" rx="8" className="fill-primary" />
-              <path d="M8 16L14 22L24 10" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+              priority
+            />
             <span className="hidden text-xl font-bold tracking-tight sm:inline">ZERO-LANG</span>
           </Link>
 
