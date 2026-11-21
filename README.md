@@ -100,7 +100,7 @@ Supabase email/password plus Google and GitHub OAuth. Row-level security means u
 ### 1. Install
 
 ```bash
-git clone https://github.com/<your-username>/zero-lang.git
+git clone https://github.com/aimenachraff-jpg/zero-lang.git
 cd zero-lang
 npm install
 ```
