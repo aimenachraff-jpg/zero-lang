@@ -9,6 +9,7 @@ export async function middleware(request: NextRequest) {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co'
   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder-anon-key'
 
+  try {
   const supabase = createServerClient(
     supabaseUrl,
     supabaseKey,
@@ -84,6 +85,9 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(redirectUrl)
   }
 
+  } catch {
+    return supabaseResponse
+  }
   return supabaseResponse
 }
 
