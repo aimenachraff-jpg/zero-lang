@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="420" viewBox="0 0 1280 420" role="img" aria-labelledby="title desc">
+  <title id="title">ZERO-LANG — Advanced English Through World Knowledge</title>
+  <desc id="desc">Open-source B2–C2 English learning platform: 6 units, 18 long-form lessons, 13,854 words of reading and 245 vocabulary terms.</desc>
+
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#070B14"/>
+      <stop offset="55%" stop-color="#0B1220"/>
+      <stop offset="100%" stop-color="#101A2E"/>
+    </linearGradient>
+    <linearGradient id="title" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="60%" stop-color="#C7D2FE"/>
+      <stop offset="100%" stop-color="#818CF8"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#22D3EE"/>
+    </linearGradient>
+    <radialGradient id="glowA" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#6366F1" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#6366F1" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowB" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#22D3EE" stop-opacity="0.30"/>
+      <stop offset="100%" stop-color="#22D3EE" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="44" height="44" patternUnits="userSpaceOnUse">
+      <path d="M44 0H0V44" fill="none" stroke="#93A4C8" stroke-opacity="0.07" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1280" height="420" fill="url(#bg)"/>
+  <rect width="1280" height="420" fill="url(#grid)"/>
+  <circle cx="1090" cy="120" r="300" fill="url(#glowA)"/>
+  <circle cx="1180" cy="340" r="240" fill="url(#glowB)"/>
+
+  <!-- Globe mark -->
+  <g transform="translate(1010 205)" fill="none" stroke="url(#accent)" stroke-width="1.6" opacity="0.9">
+    <circle r="132" stroke-opacity="0.55"/>
+    <ellipse rx="132" ry="52" stroke-opacity="0.35"/>
+    <ellipse rx="132" ry="98" stroke-opacity="0.22"/>
+    <ellipse rx="52" ry="132" stroke-opacity="0.35"/>
+    <ellipse rx="98" ry="132" stroke-opacity="0.22"/>
+    <path d="M-132 0H132" stroke-opacity="0.35"/>
+    <path d="M-114 -66H114" stroke-opacity="0.18"/>
+    <path d="M-114 66H114" stroke-opacity="0.18"/>
+  </g>
+  <g transform="translate(1010 205)">
+    <circle r="58" fill="#0B1220" stroke="url(#accent)" stroke-width="2"/>
+    <text x="0" y="20" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="52" font-weight="800" fill="url(#title)" letter-spacing="-2">Z</text>
+  </g>
+
+  <!-- Text block -->
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <g transform="translate(80 84)">
+      <rect width="248" height="34" rx="17" fill="#6366F1" fill-opacity="0.12" stroke="#818CF8" stroke-opacity="0.45"/>
+      <circle cx="22" cy="17" r="4" fill="#22D3EE"/>
+      <text x="38" y="22" font-size="13" font-weight="700" fill="#C7D2FE" letter-spacing="2.4">OPEN SOURCE · MIT</text>
+    </g>
+
+    <text x="78" y="204" font-size="88" font-weight="800" fill="url(#title)" letter-spacing="-3">ZERO-LANG</text>
+
+    <text x="80" y="256" font-size="30" font-weight="600" fill="#E2E8F0" letter-spacing="-0.4">Advanced English Through World Knowledge</text>
+
+    <text x="80" y="298" font-size="17" fill="#94A3B8">Long-form lessons · Instant graded exercises · Searchable vocabulary bank · CEFR progress</text>
+
+    <g transform="translate(80 332)">
+      <g transform="translate(0 0)">
+        <rect width="118" height="38" rx="10" fill="#0F172A" stroke="#24314D"/>
+        <text x="59" y="24" text-anchor="middle" font-size="15" font-weight="700" fill="#A5B4FC">B2 · C1 · C2</text>
+      </g>
+      <g transform="translate(130 0)">
+        <rect width="104" height="38" rx="10" fill="#0F172A" stroke="#24314D"/>
+        <text x="52" y="24" text-anchor="middle" font-size="15" font-weight="600" fill="#CBD5E1">6 units</text>
+      </g>
+      <g transform="translate(246 0)">
+        <rect width="118" height="38" rx="10" fill="#0F172A" stroke="#24314D"/>
+        <text x="59" y="24" text-anchor="middle" font-size="15" font-weight="600" fill="#CBD5E1">18 lessons</text>
+      </g>
+      <g transform="translate(376 0)">
+        <rect width="160" height="38" rx="10" fill="#0F172A" stroke="#24314D"/>
+        <text x="80" y="24" text-anchor="middle" font-size="15" font-weight="600" fill="#CBD5E1">13,854 words</text>
+      </g>
+      <g transform="translate(548 0)">
+        <rect width="168" height="38" rx="10" fill="#0F172A" stroke="#24314D"/>
+        <text x="84" y="24" text-anchor="middle" font-size="15" font-weight="600" fill="#CBD5E1">245 key terms</text>
+      </g>
+    </g>
+  </g>
+
+  <rect x="0" y="418" width="1280" height="2" fill="url(#accent)" opacity="0.7"/>
+</svg>
