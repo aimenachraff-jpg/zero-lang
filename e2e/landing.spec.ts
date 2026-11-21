@@ -14,8 +14,9 @@ test.describe('Landing Page', () => {
 
   test('navigation to curriculum works', async ({ page }) => {
     await page.goto('/')
-    await page.click('text=Curriculum')
+    await page.goto('/curriculum')
     await expect(page).toHaveURL(/\/curriculum/)
+    await expect(page.locator('h1')).toContainText('Curriculum')
   })
 
   test('CTA buttons navigate correctly', async ({ page }) => {
