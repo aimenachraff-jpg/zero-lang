@@ -17,6 +17,13 @@ dist
 # Misc
 .DS_Store
 *.pem
+*.key
+*.cert
+*.p12
+*.pfx
+
+# Netlify
+.netlify
 
 # Debug
 npm-debug.log*
