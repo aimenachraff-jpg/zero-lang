@@ -52,3 +52,5 @@ logs
 
 # OS
 Thumbs.db
+playwright-report/
+test-results/
