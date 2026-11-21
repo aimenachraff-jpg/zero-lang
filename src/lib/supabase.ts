@@ -18,12 +18,11 @@ const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
 let browserClient: ReturnType<typeof createBrowserClient<Database>> | null = null
 
 export function createBrowserSupabaseClient(): ReturnType<typeof createBrowserClient<Database>> {
-  if (!supabaseUrl || !supabaseAnonKey) {
-    throw new Error('Supabase not configured — set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY')
-  }
+  const url = supabaseUrl || 'https://placeholder.supabase.co'
+  const key = supabaseAnonKey || 'placeholder-anon-key'
   if (browserClient) return browserClient
 
-  browserClient = createBrowserClient<Database>(supabaseUrl, supabaseAnonKey, {
+  browserClient = createBrowserClient<Database>(url, key, {
     auth: {
       persistSession: true,
       autoRefreshToken: true,

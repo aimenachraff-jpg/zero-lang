@@ -15,7 +15,6 @@ export async function syncLearnerMetadata(user: {
   if (!meta.full_name && !meta.native_language && !meta.learning_goal) return
 
   const supabase = createServerSupabaseClient()
-  if (!supabase) return // build CI: no Supabase available
   const { data: profile } = await (supabase.from('profiles') as any)
     .select('full_name, native_language')
     .eq('id', user.id)
@@ -47,10 +46,9 @@ export async function syncLearnerMetadata(user: {
 /** Supabase client for Server Components. Reads the session from cookies.
  *  Returns a no-op client when env vars are absent (build CI), deferring errors to call time.
  */
-export function createServerSupabaseClient(): ReturnType<typeof createServerClient<Database>> | null {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
-  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-  if (!url || !key) return null
+export function createServerSupabaseClient(): ReturnType<typeof createServerClient<Database>> {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co'
+  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder-anon-key'
   const cookieStore = cookies()
 
   return createServerClient<Database>(
