@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import { PlacementTest } from '@/components/placement/placement-test'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
   title: 'Placement Check',
   description: 'A nine-question CEFR placement check across reading, grammar and vocabulary, with results saved to your profile.',

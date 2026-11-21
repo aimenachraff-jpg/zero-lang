@@ -16,6 +16,7 @@ export type {
 
 export async function getPublishedUnits(): Promise<Unit[]> {
   const supabase = createServerSupabaseClient()
+  if (!supabase) return [] // build CI: no Supabase
   const { data, error } = await supabase
     .from('units')
     .select('*, lessons(id)')
@@ -28,6 +29,7 @@ export async function getPublishedUnits(): Promise<Unit[]> {
 
 export async function getPublishedUnitBySlug(slug: string): Promise<Unit | null> {
   const supabase = createServerSupabaseClient()
+  if (!supabase) return null // build CI: no Supabase
   const { data, error } = await supabase
     .from('units')
     .select('*, lessons(*)')
@@ -46,6 +48,7 @@ export async function getPublishedUnitBySlug(slug: string): Promise<Unit | null>
 
 export async function getVocabulary(): Promise<VocabularyEntry[]> {
   const supabase = createServerSupabaseClient()
+  if (!supabase) return [] // build CI: no Supabase
   const { data, error } = await supabase
     .from('vocabulary')
     .select('id, term, lemma, part_of_speech, cefr_level, definitions, tags')

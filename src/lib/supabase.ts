@@ -1,29 +1,28 @@
 /**
  * Supabase Client Configuration
- * 
+ *
  * Free tier: 500MB database, 50MB file storage, 2GB bandwidth
  * Auth: Email/password, OAuth (GitHub, Google), Magic links
+ *
+ * This module is safe to import from any component, including during
+ * Next.js static builds, even when NEXT_PUBLIC_SUPABASE_* env vars are absent.
+ * It throws only at actual call time if credentials are missing.
  */
 
 import { createBrowserClient } from '@supabase/ssr'
 import type { Database } from '@/types/database'
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-
-if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error('Missing Supabase environment variables')
-}
-
-// ============================================
-// Browser Client (Client Components)
-// ============================================
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
 
 let browserClient: ReturnType<typeof createBrowserClient<Database>> | null = null
 
 export function createBrowserSupabaseClient(): ReturnType<typeof createBrowserClient<Database>> {
+  if (!supabaseUrl || !supabaseAnonKey) {
+    throw new Error('Supabase not configured — set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY')
+  }
   if (browserClient) return browserClient
-  
+
   browserClient = createBrowserClient<Database>(supabaseUrl, supabaseAnonKey, {
     auth: {
       persistSession: true,
@@ -31,12 +30,15 @@ export function createBrowserSupabaseClient(): ReturnType<typeof createBrowserCl
       detectSessionInUrl: true,
     },
   })
-  
+
   return browserClient
 }
 
 export function getBrowserSupabaseClient(): ReturnType<typeof createBrowserClient<Database>> {
-  return browserClient ?? createBrowserSupabaseClient()
+  if (!browserClient) {
+    createBrowserSupabaseClient()
+  }
+  return browserClient as ReturnType<typeof createBrowserClient<Database>>
 }
 
 // Server-only client lives in ./supabase-server.ts so this module stays
@@ -49,24 +51,24 @@ export function getBrowserSupabaseClient(): ReturnType<typeof createBrowserClien
 export async function getCurrentUser() {
   const supabase = getBrowserSupabaseClient()
   const { data: { user }, error } = await supabase.auth.getUser()
-  
+
   if (error) {
     console.error('Auth error:', error)
     return null
   }
-  
+
   return user
 }
 
 export async function getCurrentSession() {
   const supabase = getBrowserSupabaseClient()
   const { data: { session }, error } = await supabase.auth.getSession()
-  
+
   if (error) {
     console.error('Session error:', error)
     return null
   }
-  
+
   return session
 }
 
@@ -77,10 +79,10 @@ export async function signUp(email: string, password: string, metadata?: Record<
     password,
     options: {
       data: metadata,
-      emailRedirectTo: `${window.location.origin}/auth/callback`,
+      emailRedirectTo: `${typeof window !== 'undefined' ? window.location.origin : ''}/auth/callback`,
     },
   })
-  
+
   return { data, error }
 }
 
@@ -90,10 +92,7 @@ export async function signIn(email: string, password: string, rememberMe = false
     email,
     password,
   })
-  
-  // Note: Session persistence is configured in Supabase dashboard
-  // rememberMe can be used for custom session handling if needed
-  
+
   return { data, error }
 }
 
@@ -102,10 +101,10 @@ export async function signInWithOAuth(provider: 'github' | 'google') {
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider,
     options: {
-      redirectTo: `${window.location.origin}/auth/callback`,
+      redirectTo: `${typeof window !== 'undefined' ? window.location.origin : ''}/auth/callback`,
     },
   })
-  
+
   return { data, error }
 }
 
@@ -118,9 +117,9 @@ export async function signOut() {
 export async function resetPassword(email: string) {
   const supabase = getBrowserSupabaseClient()
   const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: `${window.location.origin}/auth/reset-password`,
+    redirectTo: `${typeof window !== 'undefined' ? window.location.origin : ''}/auth/reset-password`,
   })
-  
+
   return { data, error }
 }
 
@@ -129,7 +128,7 @@ export async function updatePassword(newPassword: string) {
   const { data, error } = await supabase.auth.updateUser({
     password: newPassword,
   })
-  
+
   return { data, error }
 }
 
@@ -144,7 +143,7 @@ export async function getUserProfile(userId: string) {
     .select('*')
     .eq('id', userId)
     .single()
-  
+
   return { data, error }
 }
 
@@ -156,7 +155,7 @@ export async function updateUserProfile(userId: string, updates: any) {
     .eq('id', userId)
     .select()
     .single()
-  
+
   return { data, error }
 }
 
@@ -167,7 +166,7 @@ export async function getLearnerProfile(userId: string) {
     .select('*')
     .eq('user_id', userId)
     .single()
-  
+
   return { data, error }
 }
 
@@ -178,7 +177,7 @@ export async function upsertLearnerProfile(profile: any) {
     .upsert(profile, { onConflict: 'user_id' })
     .select()
     .single()
-  
+
   return { data, error }
 }
 
@@ -193,11 +192,11 @@ export async function getUserProgress(userId: string, unitId?: string) {
     .select('*')
     .eq('user_id', userId)
     .order('updated_at', { ascending: false })
-  
+
   if (unitId) {
     query = query.eq('unit_id', unitId)
   }
-  
+
   const { data, error } = await query
   return { data, error }
 }
@@ -209,7 +208,7 @@ export async function upsertUserProgress(progress: any) {
     .upsert(progress, { onConflict: 'user_id,unit_id,lesson_id' })
     .select()
     .single()
-  
+
   return { data, error }
 }
 
@@ -220,7 +219,7 @@ export async function getSkillProfile(userId: string) {
     .select('*')
     .eq('user_id', userId)
     .single()
-  
+
   return { data, error }
 }
 
@@ -231,7 +230,7 @@ export async function upsertSkillProfile(profile: any) {
     .upsert(profile, { onConflict: 'user_id' })
     .select()
     .single()
-  
+
   return { data, error }
 }
 
@@ -247,11 +246,11 @@ export async function getSRSItems(userId: string, unitId?: string) {
     .eq('user_id', userId)
     .lte('next_review', new Date().toISOString())
     .order('next_review', { ascending: true })
-  
+
   if (unitId) {
     query = query.eq('unit_id', unitId)
   }
-  
+
   const { data, error } = await query
   return { data, error }
 }
@@ -263,7 +262,7 @@ export async function upsertSRSItem(item: any) {
     .upsert(item, { onConflict: 'user_id,vocabulary_id' })
     .select()
     .single()
-  
+
   return { data, error }
 }
 
@@ -274,7 +273,7 @@ export async function logSRSReview(review: any) {
     .insert(review)
     .select()
     .single()
-  
+
   return { data, error }
 }
 
@@ -289,11 +288,11 @@ export async function getUnits(level?: string) {
     .select('*')
     .eq('published', true)
     .order('order', { ascending: true })
-  
+
   if (level) {
     query = query.eq('level', level)
   }
-  
+
   const { data, error } = await query
   return { data, error }
 }
@@ -305,7 +304,7 @@ export async function getUnit(unitId: string) {
     .select('*, lessons(*)')
     .eq('id', unitId)
     .single()
-  
+
   return { data, error }
 }
 
@@ -316,7 +315,7 @@ export async function getVocabulary(unitId: string) {
     .select('*')
     .eq('unit_id', unitId)
     .order('frequency_band', { ascending: true })
-  
+
   return { data, error }
 }
 

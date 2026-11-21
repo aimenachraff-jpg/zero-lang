@@ -60,7 +60,11 @@ const levelVariant = (level: string): 'destructive' | 'warning' | 'info' =>
 
 export default async function HomePage() {
   const supabase = createServerSupabaseClient()
-  const { data: { user } } = await supabase.auth.getUser()
+  let user = null
+  if (supabase) {
+    const { data: { user: u } } = await supabase.auth.getUser()
+    user = u
+  }
   const [units, vocabulary] = await Promise.all([getPublishedUnits(), getVocabulary()])
   const lessonCount = units.reduce((sum, unit) => sum + (unit.lessons?.length ?? 0), 0)
   const wordCount = units.reduce((sum, unit) => sum + (unit.metadata?.word_count ?? 0), 0)

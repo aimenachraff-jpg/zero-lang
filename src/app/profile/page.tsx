@@ -27,6 +27,7 @@ const goalNames: Record<string, string> = {
 
 export default async function ProfilePage() {
   const supabase = createServerSupabaseClient()
+  if (!supabase) redirect('/auth/signin?redirect=%2Fprofile')
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) redirect('/auth/signin?redirect=%2Fprofile')
 

@@ -37,6 +37,7 @@ function relativeTime(iso: string) {
 
 export default async function ProgressPage() {
   const supabase = createServerSupabaseClient()
+  if (!supabase) redirect('/auth/signin?redirect=%2Fprogress')
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) redirect('/auth/signin?redirect=%2Fprogress')
 
