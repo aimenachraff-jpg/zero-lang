@@ -9,7 +9,7 @@ test.describe('Landing Page', () => {
 
   test('displays features', async ({ page }) => {
     await page.goto('/')
-    await expect(page.locator('text=Long-Form Lessons')).toBeVisible()
+    await expect(page.locator('text=Built for Advanced Learners')).toBeVisible()
   })
 
   test('navigation to curriculum works', async ({ page }) => {
