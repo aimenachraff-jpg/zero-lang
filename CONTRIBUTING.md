@@ -34,7 +34,7 @@ Thank you for your interest in contributing! ZERO-LANG is a community-driven pro
 
 ```bash
 # Fork and clone
-git clone https://github.com/your-username/zero-lang.git
+git clone https://github.com/aimenachraff-jpg/zero-lang.git
 cd zero-lang
 
 # Install dependencies
@@ -157,8 +157,7 @@ npm run lint
 
 ## Community
 
-- **Discord**: [discord.gg/zero-lang](https://discord.gg/zero-lang)
-- **Discussions**: GitHub Discussions
+- **Discussions**: GitHub Discussions (enabled)
 - **Issues**: GitHub Issues
 
 ## Code of Conduct
