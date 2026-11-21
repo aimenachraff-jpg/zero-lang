@@ -13,7 +13,7 @@ Thank you for your interest in contributing! ZERO-LANG is a community-driven pro
 
 ### 💻 Code Contributions
 - **Fix bugs** — Report and fix issues
-- **Add features** — Implement new tutor capabilities, progress views, etc.
+- **Add features** — Implement new capabilities, progress views, etc.
 - **Improve UI/UX** — Accessibility, responsiveness, design system
 - **Write tests** — Unit, integration, E2E tests
 - **Documentation** — Improve docs, add examples
@@ -50,7 +50,7 @@ npm run dev
 
 ### Content Development
 
-Units live in `src/content/units/`. Each unit is a JSON file:
+Units live in `scripts/content/`. Each unit is an ES module exporting `unit` and `lessons`:
 
 ```json
 {

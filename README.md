@@ -272,7 +272,18 @@ Do **not** add `SUPABASE_SERVICE_ROLE_KEY` to Vercel. It is only needed locally 
 
 ## Contributing
 
-Contributions are welcome — especially **content** contributions from advanced learners and subject specialists. Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
+ZERO-LANG is community-driven. We welcome contributions from developers, teachers, linguists, researchers, designers, translators, and anyone with useful ideas.
+
+**You do not need to be a programmer to contribute.**
+
+- **Content** — Write lessons, expand vocabulary, create exercises
+- **Code** — Fix bugs, add features, improve accessibility
+- **Design** — UI/UX improvements, visual design
+- **Translation** — Localize the interface and content
+- **Research** — Educational research, learning assessment
+- **Documentation** — Improve docs, add examples
+
+Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request. See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) for community standards.
 
 Before submitting:
 
@@ -281,6 +292,14 @@ npm run type-check
 npm run lint
 npm run build
 ```
+
+---
+
+## Community
+
+- **GitHub Discussions** — Ask questions, share ideas, propose features
+- **GitHub Issues** — Bug reports and feature requests
+- **Pull Requests** — Code and content contributions
 
 ---
 
