@@ -1,5 +1,5 @@
-import '@testing-library/jest-dom'
-import { TextEncoder, TextDecoder } from 'util'
+require('@testing-library/jest-dom')
+const { TextEncoder, TextDecoder } = require('util')
 
 global.TextEncoder = TextEncoder
 global.TextDecoder = TextDecoder
@@ -71,13 +71,13 @@ jest.mock('sonner', () => ({
 jest.mock('lucide-react', () => {
   const icons = {}
   const iconNames = ['X', 'Check', 'AlertCircle', 'Loader2', 'ChevronRight', 'ChevronLeft', 'Menu', 'X', 'Sun', 'Moon', 'Github', 'Twitter', 'Discord', 'Mail', 'Lock', 'User', 'LogOut', 'Settings', 'BookOpen', 'Brain', 'MessageSquare', 'BarChart', 'Target', 'ArrowRight', 'CheckCircle', 'Clock', 'Star', 'Award', 'Download', 'Upload', 'FileText', 'Database', 'Zap', 'Shield', 'Globe', 'Heart', 'ThumbsUp', 'ThumbsDown', 'Flag', 'Bell', 'Search', 'Filter', 'MoreHorizontal', 'MoreVertical', 'Edit', 'Trash', 'Copy', 'Link', 'Share', 'ExternalLink', 'Eye', 'EyeOff', 'Plus', 'Minus', 'Maximize', 'Minimize', 'RotateCcw', 'RefreshCw', 'Home', 'LayoutDashboard', 'Users', 'GraduationCap', 'Mic', 'Volume2', 'VolumeX', 'Languages', 'Translate', 'Globe', 'Flag', 'CheckCircle2', 'XCircle', 'AlertTriangle', 'Info', 'HelpCircle', 'Settings', 'UserPlus', 'UserMinus', 'UserCheck', 'UserX', 'LogIn', 'LogOut', 'SignIn', 'SignOut', 'Mail', 'Lock', 'Unlock', 'Key', 'Fingerprint', 'Shield', 'Lock', 'Unlock', 'Key', 'Fingerprint', 'Shield']
-  
+
   iconNames.forEach(name => {
     icons[name] = ({ className, ...props }) => (
-      <svg className={className} {...props} data-testid={`icon-${name.toLowerCase()}`} />
+      React.createElement('svg', { className, ...props, 'data-testid': `icon-${name.toLowerCase()}` })
     )
   })
-  
+
   return icons
 })
 
@@ -98,3 +98,6 @@ beforeAll(() => {
 afterAll(() => {
   console.error = originalError
 })
+
+const React = require('react')
+global.React = React
