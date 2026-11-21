@@ -52,8 +52,8 @@ export function createServerSupabaseClient(): ReturnType<typeof createServerClie
   const cookieStore = cookies()
 
   return createServerClient<Database>(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    url,
+    key,
     {
       cookies: {
         // @supabase/ssr 0.3.x API
