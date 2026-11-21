@@ -15,42 +15,54 @@ export type {
 } from '@/lib/content-types'
 
 export async function getPublishedUnits(): Promise<Unit[]> {
-  const supabase = createServerSupabaseClient()
-  const { data, error } = await supabase
-    .from('units')
-    .select('*, lessons(id)')
-    .eq('published', true)
-    .order('order', { ascending: true })
+  try {
+    const supabase = createServerSupabaseClient()
+    const { data, error } = await supabase
+      .from('units')
+      .select('*, lessons(id)')
+      .eq('published', true)
+      .order('order', { ascending: true })
 
-  if (error) throw new Error(`Could not load units: ${error.message}`)
-  return (data ?? []) as unknown as Unit[]
+    if (error) return []
+    return (data ?? []) as unknown as Unit[]
+  } catch {
+    return []
+  }
 }
 
 export async function getPublishedUnitBySlug(slug: string): Promise<Unit | null> {
-  const supabase = createServerSupabaseClient()
-  const { data, error } = await supabase
-    .from('units')
-    .select('*, lessons(*)')
-    .eq('slug', slug)
-    .eq('published', true)
-    .single()
+  try {
+    const supabase = createServerSupabaseClient()
+    const { data, error } = await supabase
+      .from('units')
+      .select('*, lessons(*)')
+      .eq('slug', slug)
+      .eq('published', true)
+      .single()
 
-  if (error || !data) return null
+    if (error || !data) return null
 
-  const unit = data as any
-  return {
-    ...unit,
-    lessons: [...(unit.lessons ?? [])].sort((a: any, b: any) => a.order - b.order),
-  } as Unit
+    const unit = data as any
+    return {
+      ...unit,
+      lessons: [...(unit.lessons ?? [])].sort((a: any, b: any) => a.order - b.order),
+    } as Unit
+  } catch {
+    return null
+  }
 }
 
 export async function getVocabulary(): Promise<VocabularyEntry[]> {
-  const supabase = createServerSupabaseClient()
-  const { data, error } = await supabase
-    .from('vocabulary')
-    .select('id, term, lemma, part_of_speech, cefr_level, definitions, tags')
-    .order('term', { ascending: true })
+  try {
+    const supabase = createServerSupabaseClient()
+    const { data, error } = await supabase
+      .from('vocabulary')
+      .select('id, term, lemma, part_of_speech, cefr_level, definitions, tags')
+      .order('term', { ascending: true })
 
-  if (error) throw new Error(`Could not load vocabulary: ${error.message}`)
-  return (data ?? []) as unknown as VocabularyEntry[]
+    if (error) return []
+    return (data ?? []) as unknown as VocabularyEntry[]
+  } catch {
+    return []
+  }
 }
